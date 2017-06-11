@@ -18,7 +18,7 @@ ifeq ($(MODE),GPU)
 endif
 
 EXEC = pwa
-
+.PHONY:clean,run
 $(EXEC):$(OBJS)
 	g++ -o $@ $^ `root-config --libs` -L`root-config --libdir` -lRooFit -D ROO_COMPLEX -fopenmp  -lgomp -lpthread -lRooFitCore -lcudart -L/usr/local/cuda/lib64
 
@@ -67,3 +67,5 @@ PWA_CTRL.o:$(CODEDIR)/PWA_CTRL.C $(CODEDIR)/PWA_CTRL.H
 
 clean:
 	rm -f $(EXEC) $(OBJS)
+run:
+	./pwa ../newbase/newbase_conf
